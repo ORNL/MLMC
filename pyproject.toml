@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "mlmc"
+version = "1.0"
+description = "MLMC and MC for path simulation code. Runs on mpi4py to parallelize the process. Optionally, uses GPUs via cupy."
+authors = ["Alberto Bocchinfuso <bocchinfusoa@ornl.gov>", "David M. Rogers <predictivestatmech@gmail.com>"]
+license = "BSD-3"
+readme = "README.md"
+
+[tool.poetry.scripts]
+test-mlmc = "tests.test_mlmc:app"
+test-scatter = "tests.test_scatter:app"
+ex-toy-pars = "mlmc.toy_simulations.pars_estimate:app"
+toy = "mlmc.toy_simulations.run:app"
+toy-analysis = "mlmc.toy_simulations.Analysis.check_times:app"
+md-sim = "mlmc.MD_simulations.run:app"
+md-analysis = "mlmc.MD_simulations.Analysis.run:app"
+md-integrity = "mlmc.MD_simulations.Analysis.integrity_plot:app"
+
+[tool.setuptools.packages.find]
+where = ["mlmc"]
+include = ["mlmc.MLMC", "mlmc.Integration_SDE", "mlmc.ParallelExecution"]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+numpy = "^1.26.4"
+mpi4py = "^3.1.6"
+typer = "^0.12.3"
+
+# Extra package for GPU support.
+cupy = {version = "^13.2.0", optional = true}
+matplotlib = {version = "^3.9.2", optional = true}
+
+[tool.poetry.extras]
+gpu-support = ["cupy"]
+plots = ["matplotlib"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

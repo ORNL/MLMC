@@ -1,0 +1,9 @@
+# Ignore the virtual environment, everyone should install it on his own computer.
+v_env
+# MacOS really likes to create .DS_store files. Ignore them.
+*.DS_store
+# Share the results folders only as compressed tgz archives.
+results_MD
+results_toy
+results_toy_rich
+results_toy_rich_bigstep
